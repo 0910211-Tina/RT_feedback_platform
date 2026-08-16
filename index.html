@@ -11,14 +11,20 @@
 <link rel="stylesheet" href="_ds/classical-d4c24eed-f8c6-4f91-a254-cfa336982823/styles.css">
 <script src="_ds/classical-d4c24eed-f8c6-4f91-a254-cfa336982823/_ds_bundle.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;family=Lora:wght@400;600&amp;family=Noto+Serif+TC:wght@400;500;600;700&amp;display=swap">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./config.js"></script>
 <script src="./rt-data-adult.js"></script>
 <script src="./rt-data-ped.js"></script>
 <script src="./rt-cloud.js"></script>
 <style>
+*,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:#f3f2f2;color:#201f1d;font-family:"Lora","Noto Serif TC",Georgia,serif}
+h1,h2,h3,h4,p,ol,ul{margin:0}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+input,select,textarea{max-width:100%}
+:focus-visible{outline:2px solid #b68235;outline-offset:2px}
+::selection{background:rgba(182,130,53,.3)}
 a{color:#7d5411;text-underline-offset:3px}
 a:hover{color:#b68235}
 ::placeholder{color:rgba(32,31,29,.36)}
@@ -30,15 +36,17 @@ summary{list-style:none}
 
 <div style="min-height: 100vh; background: #f3f2f2; color: #201f1d; font-family: 'Lora','Noto Serif TC',Georgia,serif; font-size: 16px; line-height: 1.62">
 
-  <header style="position:sticky;top:0;z-index:30;background:#23211f;color:#f8f4f4;border-bottom:1px solid rgba(182,130,53,.55);padding:18px max(24px,calc((100vw - 1360px)/2))">
+  <header style="position:sticky;top:0;z-index:30;background:#23211f;color:#f8f4f4;border-bottom:1px solid rgba(182,130,53,.55);padding:18px max(14px,calc((100vw - 1360px)/2))">
     <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between">
       <div style="min-width:0">
         <div style="font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#e1ad66">Respiratory Therapy · PGY</div>
-        <h1 style="margin:6px 0 0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:400;font-size:31px;line-height:1.14;letter-spacing:-.01em;color:#f8f4f4">完整回饋平台<span style="display:inline-block;margin-left:12px;padding:5px 12px;border:1px solid rgba(182,130,53,.6);border-radius:50px;font-family:'Lora','Noto Serif TC',serif;font-size:11.5px;font-weight:600;letter-spacing:.04em;color:#e1ad66">成人／小兒雙軌 · v7.6</span></h1>
+        <h1 style="margin:6px 0 0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:400;font-size:clamp(21px,2.6vw,31px);line-height:1.16;letter-spacing:-.01em;color:#f8f4f4">完整回饋平台<span style="display:inline-block;margin-left:12px;padding:5px 12px;border:1px solid rgba(182,130,53,.6);border-radius:50px;font-family:'Lora','Noto Serif TC',serif;font-size:11.5px;font-weight:600;letter-spacing:.04em;color:#e1ad66">成人／小兒雙軌 · v7.6</span></h1>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end">
-          <span style="font-size:12px;color:rgba(248,244,244,.6)">{{ userEmail }}</span>
+          <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:12px;color:rgba(248,244,244,.6)">{{ userEmail }}</span>
+          </sc-if>
           <sc-if value="{{ showLogin }}" hint-placeholder-val="{{ true }}">
             <button type="button" onClick="{{ onLogin }}" style="border:1px solid rgba(248,244,244,.35);background:transparent;color:#f8f4f4;border-radius:50px;padding:8px 16px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:13.5px;font-weight:600;cursor:pointer" style-hover="background:rgba(248,244,244,.12)">使用 Google 登入</button>
           </sc-if>
@@ -56,7 +64,7 @@ summary{list-style:none}
   </header>
 
   <sc-if value="{{ showCloud }}" hint-placeholder-val="{{ true }}">
-  <div style="background:#fff3e4;border-bottom:1px solid rgba(182,130,53,.28);padding:10px max(24px,calc((100vw - 1360px)/2))">
+  <div style="background:#fff3e4;border-bottom:1px solid rgba(182,130,53,.28);padding:10px max(14px,calc((100vw - 1360px)/2))">
     <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
       <div style="font-size:13px;color:#5a3b0a"><span style="font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:11px;margin-right:8px">雲端同步</span>{{ cloudStatus }}</div>
       <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ false }}">
@@ -69,14 +77,14 @@ summary{list-style:none}
   </div>
   </sc-if>
 
-  <main style="max-width: 1360px; margin: 0 auto; padding: 32px 24px 104px; position: relative">
+  <main style="max-width: 1360px; margin: 0 auto; padding: clamp(20px,3vw,32px) clamp(13px,2.4vw,24px) 112px; position: relative">
 
     <sc-if value="{{ isFeedback }}" hint-placeholder-val="{{ true }}">
       <div style="position: relative">
         <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;margin-bottom:32px">
           <div style="flex: 1 1 420px; min-width: 0; position: relative">
             <div style="font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#7d5411">Formative feedback studio</div>
-            <h2 style="margin: 10px 0 0; font-family: 'Cormorant Garamond','Noto Serif TC',serif; font-weight: 700; font-size: 38px; line-height: 1.2; letter-spacing: -.015em">先把回饋寫好，再貼回 e-Portfolio</h2>
+            <h2 style="margin: 10px 0 0; font-family: 'Cormorant Garamond','Noto Serif TC',serif; font-weight: 700; font-size: clamp(26px,4vw,38px); line-height: 1.2; letter-spacing: -.015em">先把回饋寫好，再貼回 e-Portfolio</h2>
             <p style="margin: 14px 0 0; max-width: 56ch; color: var(--color-accent-2-900); text-wrap: pretty">平台不取代正式評核表；先選成人或小兒照護，再把「實際觀察」轉成可直接貼回 e-Portfolio 的質性回饋。</p>
           </div><div style="flex:0 1 340px;min-width:0;background:#23211f;color:#f8f4f4;border-radius:12px;padding:22px 24px;box-shadow:0 1px 2px rgba(45,43,43,.06),0 10px 26px rgba(45,43,43,.12)">
             <div style="font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#e1ad66">隱私提醒</div>
@@ -87,11 +95,11 @@ summary{list-style:none}
 
         
 
-        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
           <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:12px">
               <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#23211f;color:#f8f4f4;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:13px;font-weight:600">A</span>
-              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:23px;line-height:1.3">選擇照護族群</h3>
+              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:clamp(18px,2vw,23px);line-height:1.3">選擇照護族群</h3>
             </div>
             <span style="font-size:12px;font-weight:600;color:#7d5411;letter-spacing:.04em">必選</span>
           </div>
@@ -105,11 +113,11 @@ summary{list-style:none}
             </sc-for>
           </div>
           
-        </section><section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+        </section><section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
           <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:12px">
               <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#23211f;color:#f8f4f4;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:13px;font-weight:600">00</span>
-              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:23px;line-height:1.3">選擇評核工具</h3>
+              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:clamp(18px,2vw,23px);line-height:1.3">選擇評核工具</h3>
             </div>
             <span style="font-size:12px;font-weight:600;color:#7d5411;letter-spacing:.04em">必選</span>
           </div>
@@ -124,7 +132,7 @@ summary{list-style:none}
           <p style="margin:16px 0 0;background:#fff;border:1px solid rgba(32,31,29,.1);border-left:2px solid #b68235;border-radius:10px;padding:13px 15px;font-size:13px;line-height:1.6;color:rgba(32,31,29,.75)">{{ toolNote }}</p>
         </section>
 
-        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px">
             <label style="display:block">
               <span style="display: block; font-size: 14px; font-weight: 600; color: var(--color-accent-800); margin-bottom: 7px">學員代號</span>
@@ -167,11 +175,11 @@ summary{list-style:none}
           </div>
         </section>
 
-        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
           <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:12px">
               <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#23211f;color:#f8f4f4;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:13px;font-weight:600">01</span>
-              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:23px;line-height:1.3">{{ ratingTitle }}</h3>
+              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:clamp(18px,2vw,23px);line-height:1.3">{{ ratingTitle }}</h3>
             </div>
             <span style="font-size:12px;font-weight:600;color:#7d5411;letter-spacing:.04em">{{ ratingBadge }}</span>
           </div>
@@ -204,16 +212,18 @@ summary{list-style:none}
           </sc-if>
         </section>
 
-        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
           <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:12px">
               <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#23211f;color:#f8f4f4;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:13px;font-weight:600">02</span>
-              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:23px;line-height:1.3">工具專屬重點回饋</h3>
+              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:clamp(18px,2vw,23px);line-height:1.3">工具專屬重點回饋</h3>
             </div>
             <span style="font-size:12px;font-weight:600;color:#7d5411;letter-spacing:.04em">點選可加入</span>
           </div>
           <p style="margin: 12px 0 16px; font-size: 14px; color: var(--color-neutral-800)">候選句是回饋起點，請依本次實際觀察修改後再貼回 e-Portfolio。</p>
-          <p style="margin: 0; font-size: 14px; color: var(--color-neutral-800)">{{ quickEmpty }}</p>
+          <sc-if value="{{ hasQuickEmpty }}" hint-placeholder-val="{{ false }}">
+            <p style="margin: 0; font-size: 14px; color: var(--color-neutral-800)">{{ quickEmpty }}</p>
+          </sc-if>
           <div style="display:grid;gap:10px">
             <sc-for list="{{ quickList }}" as="q" hint-placeholder-count="5">
               <button type="button" onClick="{{ q.onClick }}" style="text-align:left;cursor:pointer;border:1px solid rgba(32,31,29,.12);background:#fff;border-radius:10px;padding:13px 15px;font-family:'Lora','Noto Serif TC',serif;font-size:13.5px;line-height:1.62;color:#201f1d" style-hover="border-color:rgba(182,130,53,.5);background:#fffdf8">{{ q.text }}</button>
@@ -221,29 +231,41 @@ summary{list-style:none}
           </div>
         </section>
 
-        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
           <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:12px">
               <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#23211f;color:#f8f4f4;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:13px;font-weight:600">03</span>
-              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:23px;line-height:1.3">能力回饋構件</h3>
+              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:clamp(18px,2vw,23px);line-height:1.3">能力回饋構件</h3>
             </div>
             <span style="font-size:12px;font-weight:600;color:#7d5411;letter-spacing:.04em">各 5 個肯定／改善句</span>
           </div>
           <p style="margin: 12px 0 18px; font-size: 14px; color: var(--color-neutral-800)">跨工具核心構件固定保留；下方另加入目前工具的專屬構件。建議一次聚焦 1–3 個能力面向。</p>
           <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
             <div style="flex:1 1 262px;min-width:0;display:grid;gap:8px;align-content:start">
-              <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(32,31,29,.5);margin:2px 2px 0">{{ specificLabel }}</div>
+              <sc-if value="{{ hasSpecific }}" hint-placeholder-val="{{ true }}">
+                <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(32,31,29,.5);margin:2px 2px 0">{{ specificLabel }}</div>
+              </sc-if>
               <sc-for list="{{ specificTabs }}" as="s" hint-placeholder-count="6">
                 <button type="button" onClick="{{ s.onClick }}" style="text-align:left;cursor:pointer;border:1px solid {{ s.bd }};background:{{ s.bg }};color:{{ s.fg }};border-radius:10px;padding:11px 14px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:14.5px;font-weight:600" style-hover="border-color:rgba(182,130,53,.5)">{{ s.label }}</button>
               </sc-for>
-              <details style="border:1px solid rgba(32,31,29,.1);border-radius:10px;background:#fff;overflow:hidden;margin-top:6px">
-                <summary style="cursor: pointer; padding: 11px 14px; font-size: 14px; font-weight: 700; color: rgba(32,31,29,.62)">＋ {{ commonSummary }}</summary>
-                <div style="display:grid;gap:8px;padding:0 10px 10px">
+              <sc-if value="{{ hasSpecific }}" hint-placeholder-val="{{ true }}">
+                <details style="border:1px solid rgba(32,31,29,.1);border-radius:10px;background:#fff;overflow:hidden;margin-top:6px">
+                  <summary style="cursor: pointer; padding: 11px 14px; font-size: 14px; font-weight: 700; color: rgba(32,31,29,.62)">＋ {{ commonSummary }}</summary>
+                  <div style="display:grid;gap:8px;padding:0 10px 10px">
+                    <sc-for list="{{ commonTabs }}" as="c" hint-placeholder-count="6">
+                      <button type="button" onClick="{{ c.onClick }}" style="text-align:left;cursor:pointer;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};border-radius:10px;padding:10px 13px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:14px;font-weight:600" style-hover="border-color:rgba(182,130,53,.5)">{{ c.label }}</button>
+                    </sc-for>
+                  </div>
+                </details>
+              </sc-if>
+              <sc-if value="{{ commonFlat }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;gap:8px">
+                  <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(32,31,29,.5);margin:2px 2px 0">{{ commonFlatLabel }}</div>
                   <sc-for list="{{ commonTabs }}" as="c" hint-placeholder-count="6">
-                    <button type="button" onClick="{{ c.onClick }}" style="text-align:left;cursor:pointer;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};border-radius:10px;padding:10px 13px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:14px;font-weight:600" style-hover="border-color:rgba(182,130,53,.5)">{{ c.label }}</button>
+                    <button type="button" onClick="{{ c.onClick }}" style="text-align:left;cursor:pointer;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};border-radius:10px;padding:11px 14px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:14.5px;font-weight:600" style-hover="border-color:rgba(182,130,53,.5)">{{ c.label }}</button>
                   </sc-for>
                 </div>
-              </details>
+              </sc-if>
             </div>
             <div style="flex:100 1 420px;border:1px solid rgba(32,31,29,.1);border-radius:12px;background:#fff;padding:20px 22px;min-width:0">
               <h4 style="margin:0 0 6px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:20px;font-weight:600">{{ panelTitle }}</h4>
@@ -264,11 +286,11 @@ summary{list-style:none}
           </div>
         </section>
 
-        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);margin-bottom:24px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
           <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <div style="display:flex;align-items:center;gap:12px">
               <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#23211f;color:#f8f4f4;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:13px;font-weight:600">04</span>
-              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:23px;line-height:1.3">完整回饋與 Take-home message</h3>
+              <h3 style="margin:0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:clamp(18px,2vw,23px);line-height:1.3">完整回饋與 Take-home message</h3>
             </div>
             <span style="font-size:12px;font-weight:600;color:#7d5411;letter-spacing:.04em">可直接複製回 e-Portfolio</span>
           </div>
@@ -320,7 +342,7 @@ summary{list-style:none}
         <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:28px">
           <div>
             <div style="font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#7d5411">Local-first · Cloud sync</div>
-            <h2 style="margin:10px 0 0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:400;font-size:36px;line-height:1.2">回饋紀錄與簡易統計</h2>
+            <h2 style="margin:10px 0 0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:400;font-size:clamp(25px,3.6vw,36px);line-height:1.2">回饋紀錄與簡易統計</h2>
             <p style="margin:12px 0 0;max-width:62ch;color:rgba(32,31,29,.7)">未登入時紀錄保留於本機；Google 登入後可同步至雲端。正式評核仍回 e-Portfolio 完成。</p>
           </div>
           <div style="display:flex;gap:10px">
@@ -372,7 +394,9 @@ summary{list-style:none}
               </tbody>
             </table>
           </div>
-          <p style="margin:22px 0 6px;text-align:center;font-size:13.5px;color:rgba(32,31,29,.5)">{{ emptyState }}</p>
+          <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:22px 0 6px;text-align:center;font-size:13.5px;color:rgba(32,31,29,.5)">尚無紀錄。</p>
+          </sc-if>
         </section>
       </div>
     </sc-if>
@@ -381,7 +405,7 @@ summary{list-style:none}
       <div>
         <div style="margin-bottom:28px">
           <div style="font-family:'Cormorant Garamond','Noto Serif TC',serif;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#7d5411">Source &amp; limitations</div>
-          <h2 style="margin:10px 0 0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:400;font-size:36px;line-height:1.2">資料基礎與平台原則</h2>
+          <h2 style="margin:10px 0 0;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:400;font-size:clamp(25px,3.6vw,36px);line-height:1.2">資料基礎與平台原則</h2>
           <p style="margin:12px 0 0;max-width:74ch;color:rgba(32,31,29,.7)">成人區以既有 e-Portfolio 表單與歷年質性回饋為基礎；兒科區另外標示資料限制，不把暫行兒科句庫包裝成正式量表。</p>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:24px">
@@ -392,8 +416,8 @@ summary{list-style:none}
             </div>
           </sc-for>
         </div>
-        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:26px;box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
-          <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:23px">核心原則</h3>
+        <section style="background:#faf8f6;border:1px solid rgba(32,31,29,.1);border-radius:12px;padding:clamp(16px,2.2vw,26px);box-shadow:0 1px 2px rgba(45,43,43,.05),0 6px 16px rgba(45,43,43,.05)">
+          <h3 style="margin:0 0 14px;font-family:'Cormorant Garamond','Noto Serif TC',serif;font-weight:600;font-size:clamp(18px,2vw,23px)">核心原則</h3>
           <ol style="margin:0;padding-left:22px;display:grid;gap:10px">
             <sc-for list="{{ principles }}" as="p" hint-placeholder-count="6">
               <li style="font-size:14.5px;line-height:1.65;color:rgba(32,31,29,.8)">{{ p.text }}</li>
@@ -865,11 +889,14 @@ class Component extends DCLogic {
       ratingTitle: rb.title, ratingBadge: rb.badge, ratingHint: rb.hint, levelNote: rb.levelNote || '',
       domainCards: rb.domains || [], domainSummary: rb.summary || '',
       epaLevel: s.epaLevel, epaLevelOptions, onEpaLevel: ev => this.setState({ epaLevel: ev.target.value }),
-      quickEmpty: quick.msg, quickList: quick.list.map(t => ({ text: t, onClick: () => this.appendFeedback(t) })),
+      quickEmpty: quick.msg, hasQuickEmpty: !!quick.msg, hasSpecific: specific.length > 0, isEmpty: rows.length === 0,
+      quickList: quick.list.map(t => ({ text: t, onClick: () => this.appendFeedback(t) })),
       specificLabel: specific.length ? TOOLS[s.tool].label + '｜' + this.CARES[s.care].label + '專屬構件' : '',
       specificTabs: specific.map(c => tab(c, 'specific')),
       commonTabs: common.map(c => tab(c, 'common')),
       commonSummary: (ped ? '小兒核心構件' : '跨工具核心構件') + '（共 ' + common.length + ' 項）',
+      commonFlat: specific.length === 0,
+      commonFlatLabel: (ped ? '小兒核心構件' : '跨工具核心構件') + '｜共 ' + common.length + ' 項',
       panelTitle: panel ? panel.label : '請選擇一個回饋構件',
       panelNote: panel
         ? (ped ? '兒科構件為暫行情境化句庫：請依個案年齡、體重、baseline、設備與院內規範微調。' : '可同時選「值得肯定」與「可以再加強」，再依本次觀察微調。')
